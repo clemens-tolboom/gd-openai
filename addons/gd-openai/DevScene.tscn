@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cll1dc4fnrylk"]
+
+[ext_resource type="Script" path="res://addons/gd-openai/dev_scene.gd" id="1_7tq24"]
+[ext_resource type="Script" path="res://addons/gd-openai/connector.gd" id="2_m2ro5"]
+[ext_resource type="PackedScene" uid="uid://gyrwwx5kril5" path="res://addons/gd-openai/char_completions.tscn" id="4_ligrd"]
+[ext_resource type="Script" path="res://addons/gd-openai/resources/v1/chat_completions_request.gd" id="5_yebpf"]
+
+[sub_resource type="Resource" id="Resource_fmwym"]
+script = ExtResource("5_yebpf")
+model = "gpt-3.5-turbo"
+system = "You are a expert in programming in GD Script latest version 2.0"
+assistant = ""
+user = "Write code to generate random mazes. The maze is a square string of 10 by 10 characters"
+version = null
+path = null
+
+[node name="DevScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7tq24")
+
+[node name="OpenAiApiRequest" type="HTTPRequest" parent="."]
+script = ExtResource("2_m2ro5")
+
+[node name="CharCompletions" parent="." instance=ExtResource("4_ligrd")]
+layout_mode = 1
+request = SubResource("Resource_fmwym")
+show_system = true
+
+[connection signal="data_received" from="OpenAiApiRequest" to="." method="_on_open_ai_api_request_data_received"]
+[connection signal="error_response" from="OpenAiApiRequest" to="." method="_on_open_ai_api_request_error_response"]
+[connection signal="submit_request" from="CharCompletions" to="." method="_on_char_completions_submit_request"]

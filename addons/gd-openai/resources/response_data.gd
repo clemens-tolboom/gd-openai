@@ -5,10 +5,10 @@ extends Resource
 var __class_name: StringName = "ResponseData"
 
 ## Taken from the RequestData instance
-var version:StringName = 'v1'
+@export var version:StringName = "v1"
 
 ## Taken from the RequestData instance
-var path:StringName = ''
+@export var path:StringName = ""
 
 var irrelevant_props :Array[String] = [
 	"RefCounted", 

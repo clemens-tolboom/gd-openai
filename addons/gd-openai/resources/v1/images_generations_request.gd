@@ -26,7 +26,7 @@ const sizes:Array[String] = ["256x256", "512x512", "1024x1024"]
 ## The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
 ##
 ## @options
-var size:String = "1024x1024":
+@export var size:String = "1024x1024":
 	set(value):
 		if sizes.has(value):
 			size = value

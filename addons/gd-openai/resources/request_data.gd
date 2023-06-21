@@ -2,7 +2,16 @@ class_name RequestData
 
 extends Resource
 
+const data_resource = "user://open_ai_user_data.tres"
+
+## OpenAI API specific version[br]
+##[br]
+## FIXME: should we export this?
 var version:StringName = 'v1'
+
+## OpenAI API specific path[br]
+##[br]
+## FIXME: should we export this?
 var path:StringName = ""
 
 ## Content is a dictionary (sure?)[br]
@@ -25,13 +34,14 @@ func _init():
 func set_authorization():
 	if _api_key == "":
 		get_api_key()
-	assert(_api_key)
+	assert(not _api_key == "", "No API key found")
 
 	headers["Authorization"] = "Bearer %s" % _api_key
 
 
 func get_api_key():
-	var r:OpenAiUserData = ResourceLoader.load("user://open_ai_user_data.tres")
+	var r:OpenAiUserData = ResourceLoader.load(data_resource)
+	assert(not r == null, "File '%s'not found or wrong content" % data_resource)
 	_api_key = r.api_key
 
 

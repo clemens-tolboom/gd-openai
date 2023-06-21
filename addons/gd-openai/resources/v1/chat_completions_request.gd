@@ -40,6 +40,7 @@ const GroupId:String = "gpt"
 ## Not yet implemented[br]
 ##[br]
 ## Documentation is currently incomplete.
+## @see https://openai.com/blog/function-calling-and-other-api-updates
 var function:String = ""
 
 func _init():

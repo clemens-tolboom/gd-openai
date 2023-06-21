@@ -1,12 +1,15 @@
-## Base API Request Handler
-class_name OpenAiApiRequest
+## OpenAI API Request Handler
+class_name OpenAiApiRequest extends HTTPRequest
 
-extends HTTPRequest
-
+## Notify for errors trying to serve the request.
 signal error_response(error:Dictionary)
 
+## Notify for the received data.
+##
+## This should be ResponseData extended class.
 signal data_received(data)
 
+## Hold
 var resource:OpenAiUserData
 
 ## The Root for API requests
@@ -17,25 +20,29 @@ func _init():
 
 
 ## Make is possible to switch versioning.[br]
-##
-## Note: developer only for now.
 const ApiVersion:StringName = "v1/"
 
-# ===== DRY alert ====
-# do_get and do_post only differ in method and yes/no body.
-
+## Hold client request Response Resource.
+##
+## This should be ResponseData extended class.
 var _resp
 
+
+## Fixme: why is this needed?
+## When @export values in RequestData it seems not to work anymore
 func _copy_props(req, resp):
 	resp.path = req.path
 	resp.version = req.version
 
+# ===== DRY alert ====
+# do_get and do_post only differ in method and yes/no body.
 
+## Do a GET request to the 
 func do_get(req, resp):
 	_copy_props(req, resp)
 	_resp = resp
 	var args:Dictionary = req.build_request(BaseURL)
-	printt(args['uri'])
+	printt("do_get", args['uri'])
 
 	var has_error = request( \
 		args['uri'], \
@@ -75,10 +82,9 @@ func _http_request_completed(result: int, response_code: int, headers: PackedStr
 
 	var json = JSON.new()
 	json.parse(content)
-
 	var response = json.get_data()
 #	print(response)
-	
+
 	if response_code >= 400:
 		printt("ERROR", response_code, response["error"])
 		error_response.emit(response["error"])

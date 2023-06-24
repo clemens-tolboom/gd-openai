@@ -10,7 +10,7 @@ Download the ZIP file from GitHub or install through the AssetLib when available
 ## What calls are available?
 
 - [/v1/chat/completions](https://platform.openai.com/docs/api-reference/chat)
-  to mimic ChatGPT sessions. **Note**: only model, system, assistent, user in single mode are available.
+  to mimic ChatGPT sessions. **Note**: only model, system, assistent, user are available.
 - [/v1/models](https://platform.openai.com/docs/api-reference/models) to find available models.
 - [/v1/images/generations](https://platform.openai.com/docs/api-reference/images) for generating inspiring images.
 

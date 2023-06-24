@@ -8,10 +8,10 @@ const data_resource = "user://open_ai_user_data.tres"
 
 
 ## OpenAI API specific version
-@export var version:StringName = 'v1'
+var version:StringName = 'v1'
 
 ## OpenAI API specific path.
-@export var path:StringName = ""
+var path:StringName = ""
 
 ## Placeholder for content.[br]
 ##[br]

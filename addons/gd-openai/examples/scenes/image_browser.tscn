@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bow8aq4ll6a02"]
 
-[ext_resource type="Script" path="res://addons/gd-openai/scenes/image_browser.gd" id="1_sv11d"]
+[ext_resource type="Script" path="res://addons/gd-openai/examples/scenes/image_browser.gd" id="1_ujn6f"]
 
 [node name="image_browser" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sv11d")
+script = ExtResource("1_ujn6f")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1

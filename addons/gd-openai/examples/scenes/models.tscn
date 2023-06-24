@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://iyvclwcm4njs"]
 
-[ext_resource type="Script" path="res://addons/gd-openai/scenes/models.gd" id="1_51otn"]
+[ext_resource type="Script" path="res://addons/gd-openai/examples/scenes/models.gd" id="1_ew2wj"]
 [ext_resource type="Script" path="res://addons/gd-openai/connector.gd" id="2_21xf1"]
 [ext_resource type="Script" path="res://addons/gd-openai/resources/v1/models_request.gd" id="2_uvxy6"]
 
-[sub_resource type="Resource" id="Resource_k1nu7"]
+[sub_resource type="Resource" id="Resource_q3jkf"]
 script = ExtResource("2_uvxy6")
 
 [node name="Models" type="Control"]
@@ -14,8 +14,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_51otn")
-request = SubResource("Resource_k1nu7")
+script = ExtResource("1_ew2wj")
+request = SubResource("Resource_q3jkf")
 
 [node name="OpenAiApiRequest" type="HTTPRequest" parent="."]
 script = ExtResource("2_21xf1")

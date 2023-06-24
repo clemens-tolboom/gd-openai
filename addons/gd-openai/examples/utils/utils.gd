@@ -1,6 +1,6 @@
 class_name GdOpenAiUtils extends RefCounted
 
-static func bas64_to_texture(b64_json:String) -> ImageTexture:
+static func base64_to_texture(b64_json:String) -> ImageTexture:
 	var img = Marshalls.base64_to_raw(b64_json)
 	var i:Image = Image.new()
 	var error = i.load_png_from_buffer(img)

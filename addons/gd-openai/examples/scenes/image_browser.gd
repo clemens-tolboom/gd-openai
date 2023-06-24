@@ -26,7 +26,7 @@ func read_file(file:String):
 func update_images(items, clear:bool = false):
 	for d in items:
 		var b64:String = d.b64_json
-		var t:ImageTexture = GdOpenAiUtils.bas64_to_texture(b64)
+		var t:ImageTexture = GdOpenAiUtils.base64_to_texture(b64)
 		if not t == null:
 			var tb = TextureButton.new()
 			tb.texture_normal = t

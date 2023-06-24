@@ -1,6 +1,5 @@
-class_name ResponseData
-
-extends Resource
+## Base response resource for OpenAI API.[br]
+class_name ResponseData extends Resource
 
 var __class_name: StringName = "ResponseData"
 

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="OpenAiUserData" load_steps=2 format=3 uid="uid://b0ecgukyrsuqm"]
+
+[ext_resource type="Script" path="res://addons/gd-openai/open_ai_user_data.gd" id="1_yhhaw"]
+
+[resource]
+script = ExtResource("1_yhhaw")
+api_key = &"replace-with-your-api-key"

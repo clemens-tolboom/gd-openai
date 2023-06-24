@@ -47,7 +47,6 @@ func _init():
 	super._init()
 	path = "chat/completions"
 
-	form_fields = ["model", "system", "assistant", "user"]
 
 func add_message(d:Dictionary, message_type:StringName, content:String):
 	if not d['body'].has('messages'):
@@ -62,3 +61,4 @@ func build_request(root:String) -> Dictionary:
 		add_message(res, "assistant", assistant)
 	add_message(res, "user", user)
 	return res
+

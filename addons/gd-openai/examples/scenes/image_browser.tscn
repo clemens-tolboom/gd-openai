@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bow8aq4ll6a02"]
+
+[ext_resource type="Script" path="res://addons/gd-openai/scenes/image_browser.gd" id="1_sv11d"]
+
+[node name="image_browser" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sv11d")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FlowContainer" type="HFlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -12,10 +12,10 @@ var response:ChatCompletionResponse = ChatCompletionResponse.new()
 @export var show_system :bool = false
 @onready var system:TextEdit = %System
 
-@export var show_assistant :bool = false
+@export var show_assistant :bool = true
 @onready var assistant:TextEdit = %Assistant
 
-@export var show_user :bool = false
+@export var show_user :bool = true
 @onready var user:TextEdit = %User
 
 @onready var resp_text = %Response

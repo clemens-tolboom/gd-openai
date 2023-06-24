@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://gyrwwx5kril5"]
 
-[ext_resource type="Script" path="res://addons/gd-openai/scenes/chat_completions.gd" id="1_c1n6v"]
+[ext_resource type="Script" path="res://addons/gd-openai/examples/scenes/chat_completions.gd" id="1_w43qh"]
 [ext_resource type="Script" path="res://addons/gd-openai/resources/v1/chat_completions_request.gd" id="2_x8m1y"]
 [ext_resource type="Script" path="res://addons/gd-openai/connector.gd" id="3_7sdmk"]
 
-[sub_resource type="Resource" id="Resource_4xili"]
+[sub_resource type="Resource" id="Resource_jk567"]
 script = ExtResource("2_x8m1y")
 model = "gpt-3.5-turbo"
 system = ""
@@ -18,11 +18,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_c1n6v")
-request = SubResource("Resource_4xili")
-show_system = true
-show_assistant = true
-show_user = true
+script = ExtResource("1_w43qh")
+request = SubResource("Resource_jk567")
 
 [node name="OpenAiApiRequest" type="HTTPRequest" parent="."]
 script = ExtResource("3_7sdmk")

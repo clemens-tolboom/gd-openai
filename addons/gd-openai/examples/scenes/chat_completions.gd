@@ -22,13 +22,7 @@ var response:ChatCompletionResponse = ChatCompletionResponse.new()
 
 signal response_received(req:ChatCompletionRequest, res:ChatCompletionResponse)
 
-func setup_resources():
-	var dir = DirAccess.open("user://")
-	dir.make_dir_recursive("openai/chat/completions")
-
 func _ready():
-	setup_resources()
-
 	system.placeholder_text = "This is the instruction about the behaviour of the Chat AI."
 	system.visible = show_system
 

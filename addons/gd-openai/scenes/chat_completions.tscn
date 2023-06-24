@@ -43,11 +43,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+wrap_mode = 1
 
 [node name="Assistant" type="TextEdit" parent="VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+wrap_mode = 1
 
 [node name="User" type="TextEdit" parent="VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true

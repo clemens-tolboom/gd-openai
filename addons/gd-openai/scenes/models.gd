@@ -47,7 +47,8 @@ func _on_open_ai_api_request_error_response(error):
 	print(error)
 
 func fetch_models():
-	connector.do_get(request, ModelsResponse.new())
+	response = ModelsResponse.new()
+	connector.do_get(request, response)
 
 func _on_refresh_pressed():
 	fetch_models()

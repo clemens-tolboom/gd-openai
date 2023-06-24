@@ -20,7 +20,7 @@ var response:ChatCompletionResponse = ChatCompletionResponse.new()
 
 @onready var resp_text = %Response
 
-signal submit_request(req, res)
+signal response_received(req:ChatCompletionRequest, res:ChatCompletionResponse)
 
 func setup_resources():
 	var dir = DirAccess.open("user://")
@@ -29,7 +29,7 @@ func setup_resources():
 func _ready():
 	setup_resources()
 
-	system.placeholder_text = "This is the insturction about the behaviour of the Chat AI."
+	system.placeholder_text = "This is the instruction about the behaviour of the Chat AI."
 	system.visible = show_system
 
 	assistant.placeholder_text = "This is the context or previous generated text."
@@ -62,17 +62,14 @@ func update_request():
 func _on_submit_pressed():
 	update_request()
 	connector.do_post(request, response)
-#	submit_request.emit(request, ChatCompletionResponse.new())
+
 
 func _on_open_ai_api_request_data_received(data):
 	print("received")
 	response = data
 	resp_text.text = data.choices[0].message.content
-	var file_path = chat_path + file_pattern.format([12])
-	var error:int = ResourceSaver.save(response, file_path)
-	if not error == OK:
-		printt("Unable to save models")
 
+	response_received.emit(request, response)
 
 func _on_open_ai_api_request_error_response(error):
 	print(error)

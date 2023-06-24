@@ -1,6 +1,6 @@
 # GD Script OpenAI
 
-Interfacing with the [OpenAI API's](https://platform.openai.com/overview)
+Interfacing with the [OpenAI API's](https://platform.openai.com/overview) using their **[API Key](https://platform.openai.com/account/api-keys)**
 
 With this tools addon you can quickly create scenes interacting with the
 [API](https://platform.openai.com/docs/api-reference) of OpenAI.

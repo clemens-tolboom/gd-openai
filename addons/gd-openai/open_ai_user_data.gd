@@ -1,8 +1,9 @@
-class_name OpenAiUserData
-extends Resource
+## Resource holding the API key.[br]
+##[br]
+## We could add more properties in the future.
+class_name OpenAiUserData extends Resource
 
-@export
-var api_key:StringName = ''
-
-@export
-var api_calls:int = 0
+## OpenAI API key.[br]
+##[br]
+## Do not share unless your know what you're doing.
+@export var api_key:StringName = ''

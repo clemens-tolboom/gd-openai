@@ -7,51 +7,33 @@ const file_pattern:StringName = "res-{0}.tres"
 
 @export var request:ChatCompletionRequest
 
+@onready var default_request:ChatCompletionRequest
 var response:ChatCompletionResponse = ChatCompletionResponse.new()
 
-@export var show_system :bool = false
-@onready var system:TextEdit = %System
+@onready var messages = %Messages
 
-@export var show_assistant :bool = true
-@onready var assistant:TextEdit = %Assistant
-
-@export var show_user :bool = true
-@onready var user:TextEdit = %User
-
-@onready var resp_text = %Response
 
 signal response_received(req:ChatCompletionRequest, res:ChatCompletionResponse)
 
 func _ready():
-	system.placeholder_text = "This is the instruction about the behaviour of the Chat AI."
-	system.visible = show_system
-
-	assistant.placeholder_text = "This is the context or previous generated text."
-	assistant.visible = show_assistant
-	
-	user.placeholder_text = "Instruct the Chat AI with your wishes."
-	user.visible = show_user
-
-	reset()
+	default_request = request.duplicate(true)
+	messages.messages = request.messages
+	messages.update_messages()
 
 func _on_clear_pressed():
-	reset()
-
-func reset():
-	if show_system:
-		system.text = request.system
-	if show_assistant:
-		assistant.text = request.assistant
-	if show_user:
-		user.text = request.user
+	request.messages = default_request.messages
+	messages.messages = request.messages
+	messages.update_messages()
 
 func update_request():
-	if show_system:
-		request.system = system.text
-	if show_assistant:
-		request.assistant = assistant.text
-	if show_user:
-		request.user = user.text
+	printt(request.messages, messages.messages)
+	request.messages = []
+	for m in messages.messages:
+		var msg:ChatCompletionRequestMessage = m
+		if not msg.content.strip_edges() == "":
+			request.messages.push_back(m)
+		messages.messages = request.messages
+
 
 func _on_submit_pressed():
 	update_request()
@@ -59,9 +41,15 @@ func _on_submit_pressed():
 
 
 func _on_open_ai_api_request_data_received(data):
-	print("received")
+	printt("received", data.choices)
 	response = data
-	resp_text.text = data.choices[0].message.content
+
+	for c in response.choices:
+		var r:ChatCompletionRequestMessage = ChatCompletionRequestMessage.new()
+		r.role = c.message.role
+		r.content = c.message.content
+		request.messages.push_back(r)
+		messages.update_messages()
 
 	response_received.emit(request, response)
 

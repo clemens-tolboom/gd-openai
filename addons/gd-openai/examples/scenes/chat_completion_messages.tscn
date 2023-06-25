@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcj4yrlscskor"]
+
+[ext_resource type="Script" path="res://addons/gd-openai/examples/scenes/chat_completion_messages.gd" id="1_epqdi"]
+[ext_resource type="Script" path="res://addons/gd-openai/resources/v1/chat_completion_request_message.gd" id="2_ebei4"]
+
+[sub_resource type="Resource" id="Resource_7klil"]
+script = ExtResource("2_ebei4")
+role = "user"
+content = ""
+name = ""
+
+[sub_resource type="Resource" id="Resource_ggoq8"]
+script = ExtResource("2_ebei4")
+role = "user"
+content = ""
+name = ""
+
+[sub_resource type="Resource" id="Resource_hh78u"]
+script = ExtResource("2_ebei4")
+role = "user"
+content = ""
+name = ""
+
+[sub_resource type="Resource" id="Resource_cinmu"]
+script = ExtResource("2_ebei4")
+role = "user"
+content = ""
+name = ""
+
+[node name="Messages" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_epqdi")
+messages = Array[ExtResource("2_ebei4")]([SubResource("Resource_7klil"), SubResource("Resource_ggoq8"), SubResource("Resource_hh78u"), SubResource("Resource_cinmu")])
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Actions" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Add" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Add"
+
+[connection signal="pressed" from="Actions/Add" to="." method="_on_add_pressed"]

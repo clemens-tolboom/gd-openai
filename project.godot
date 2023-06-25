@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="base"
+config/name="OpenAI API"
+config/description="API helper to connect to an OpenAI API"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 

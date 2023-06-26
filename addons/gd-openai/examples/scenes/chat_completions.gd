@@ -28,15 +28,23 @@ func _on_clear_pressed():
 func update_request():
 	printt(request.messages, messages.messages)
 	request.messages = []
+	var index:int = 0
 	for m in messages.messages:
+		index += 1
 		var msg:ChatCompletionRequestMessage = m
 		if not msg.content.strip_edges() == "":
+			printt("Adding", index, "\n", m.content)
 			request.messages.push_back(m)
-		messages.messages = request.messages
+		else:
+			printt("Skipping", index)
+	messages.messages = request.messages
 
 
 func _on_submit_pressed():
 	update_request()
+	if not request.messages.size() > 0:
+		print_debug("No messages to process")
+		return
 	connector.do_post(request, response)
 
 

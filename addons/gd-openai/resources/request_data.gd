@@ -1,11 +1,12 @@
-## Request resource for OpenAI API.[br]
+## Request resource for OpenAI API.
+##
+## Base request class taking care settings up the headers.
 ##[br]
-## This is the base request
+## This needs OpenAiUserData resource. See [constant CONFIG].
 class_name RequestData extends Resource
 
 ## Path for the API key and other fields.
-const data_resource = "user://open_ai_user_data.tres"
-
+const CONFIG = "user://open_ai_user_data.tres"
 
 ## OpenAI API specific version
 var version:StringName = 'v1'
@@ -24,36 +25,41 @@ var headers:Dictionary = {
 	"Content-Type": "application/json"
 }
 
-## Do not export this as it then become part of the Resource.
+# Do not export this as it then become part of the resources.
+
+## Secret key for using the OpenAI API.
 var _api_key:String = ""
 
 
 ## Make sure the authorization is set.
-func _init():
+func _init() -> void:
 	set_authorization()
 
 
 ## Prepare for the API key.
-func set_authorization():
+func set_authorization() -> void:
 	if _api_key == "":
-		get_api_key()
+		load_api_key()
 	assert(not _api_key == "", "No API key found")
 
 	headers["Authorization"] = "Bearer %s" % _api_key
 
-## Helper to key the API key.[br]
-func get_api_key():
-	var r:OpenAiUserData = ResourceLoader.load(data_resource)
-	assert(not r == null, "File '%s'not found or wrong content" % data_resource)
+
+## Helper to key the API key.
+func load_api_key() -> void:
+	var r:OpenAiUserData = ResourceLoader.load(CONFIG)
+	assert(not r == null, "File '%s'not found or wrong content" % CONFIG)
 	_api_key = r.api_key
 
+
 ## Build the API path.
-func get_uri(root:String):
+func get_uri(root:String) -> String:
 	return "{root}/{version}/{path}".format({
 		"root": root,
 		"version": version,
 		"path": path,
 	})
+
 
 ## Make strings of the header key, value pairs.
 func fold_key_value(d:Dictionary) -> PackedStringArray:
@@ -61,6 +67,7 @@ func fold_key_value(d:Dictionary) -> PackedStringArray:
 	for k in d:
 		r.append("{key}: {value}".format({"key": k, "value": d[k]}))
 	return r
+
 
 ## Builds a dictionary with the needed keys.[br]
 func build_request(root:String) -> Dictionary:

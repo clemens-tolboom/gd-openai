@@ -1,10 +1,14 @@
+## Sub resource for the [ChatCompletionRequest].
+##
+## Structure for messages in [ChatCompletionRequest].
 class_name ChatCompletionRequestMessage extends Resource
 
 
-## The role of the messages author. One of `system`, `user`, `assistant`, or `function`.[br]
+##The role of the messages author. One of `system`, `user`, `assistant`, or `function`.
 ##[br]
-## Note: function is not supported yet.
-## @required
+##Note: [code]function[/code] is not supported yet.[br]
+##[br]
+##@required
 @export_enum("system", "user", "assistant", "function") var role:String = "user"
 
 ## The contents of the message. `content` is required for all messages except assistant messages with function calls.

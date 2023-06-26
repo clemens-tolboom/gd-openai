@@ -1,7 +1,7 @@
-## Chat completion continues the given prompts[br]
-##[br]
+## Chat completion continues the given prompts
+##
 ## There are 4 prompt types: user, assistant, system and function[br]
-## Of there [code]function[/code] is not implemented.
+## NOTE: [code]function[/code] is not implemented.
 class_name ChatCompletionRequest
 
 extends RequestData
@@ -9,22 +9,24 @@ extends RequestData
 ## This is part of the GPT models
 const GroupId:String = "gpt"
 
-@export_category("ChatCompletionRequest")
 
-## One of the models of GPT-3[br]
-##[br]
-## See ModelsRequest and ModelsResponse for list of sub models
+## Indicates the model to use.
+##
+## See [ModelsRequest] and [ModelsResponse] for list of sub models.
 @export var model:String = "gpt-3.5-turbo"
 
+## List of messages like system, assistant or user.
 @export var messages:Array[ChatCompletionRequestMessage] = []
 
-
-func _init():
+## Initialize class.
+##
+## The API subpath will be prefixed by [var version]
+func _init() -> void:
 	super._init()
 	path = "chat/completions"
 
 
-func add_message(d:Dictionary, message_type:StringName, content:String):
+func add_message(d:Dictionary, message_type:StringName, content:String) -> void:
 	if not d['body'].has('messages'):
 		d["body"]["messages"] = []
 	d["body"]["messages"].push_back({"role": message_type, "content": content})

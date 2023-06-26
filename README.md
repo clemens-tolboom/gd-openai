@@ -2,10 +2,18 @@
 
 Interfacing with the [OpenAI API's](https://platform.openai.com/overview) using their **[API Key](https://platform.openai.com/account/api-keys)**
 
-With this tools addon you can quickly create scenes interacting with the
-[API](https://platform.openai.com/docs/api-reference) of OpenAI.
+With the `gd-openai` addon you can quickly create scenes interacting with the
+[API](https://platform.openai.com/docs/api-reference) of OpenAI. See the examples below.
 
 Download the ZIP file from GitHub or install through the AssetLib when available.
+
+## User Data
+
+The settings file `open_ai_user_data.tres` and all requests and responses are saved in `user://`.
+
+The settings file for security reasons as it may not become part of the build.
+
+The requests and responses for browsing back possibilities.
 
 ## What calls are available?
 
@@ -36,7 +44,7 @@ or fiddle with `images/generations`.
 
 You need to add 3 parts to your scene:
 
-## OpenAiApiRequest
+### OpenAiApiRequest
 
 As a child in your tree.
 
@@ -44,10 +52,16 @@ As a child in your tree.
 @ready var openai_api_request:OpenAiApiRequest = $OpenAiApiRequest
 
 func _ready():
-	# Connect openai_api_request signals true UI or code
+	# Connect openai_api_request signals through the UI or code
+
+func _on_open_ai_api_request_data_received(data):
+  response = data
+
+func _on_open_ai_api_request_error_response(error):
+	print(error)
 ```
 
-## RequestData sub-class
+### RequestData sub-class
 
 RequestData sub-class like ModelsRequest, ChatCompletionsRequest, ImageGenerationsRequest, etc
 
@@ -57,7 +71,7 @@ RequestData sub-class like ModelsRequest, ChatCompletionsRequest, ImageGeneratio
 
 Then set it's value through the UI.
 
-## ResponseData sub-class
+### ResponseData sub-class
 
 ResponseData sub-class like ModelsResponse.
 
@@ -65,7 +79,7 @@ ResponseData sub-class like ModelsResponse.
 var response:ChatCompletionsResponse = ChatCompletionsResponse.new()
 ```
 
-## Request/response
+### Request/response
 
 Initiate the call ie by a Button click
 
@@ -77,12 +91,17 @@ and wait for one of the two signals to appear.
 
 ## Roadmap
 
-- Fix list of prompts by roles on [/v1/chat/completions](https://platform.openai.com/docs/api-reference/chat)
 - Add **all** properties to [/v1/chat/completions](https://platform.openai.com/docs/api-reference/chat)
 - [/v1/models/{model}](https://platform.openai.com/docs/api-reference/models/retrieve)
-- you wishes / PRs / support
+- your wishes / PRs / support
 
 ## References
+
+- [OpenAI API's](https://platform.openai.com/overview)
+- [API Key](https://platform.openai.com/account/api-keys)
+- [API](https://platform.openai.com/docs/api-reference)
+
+### Some other implementations
 
 - [godot-openai](https://github.com/Buri/godot-openai)
 - [GPTIntegration](https://github.com/finepointcgi/Godot-Open-AI-GPT-Integration)

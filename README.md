@@ -7,6 +7,20 @@ With the `gd-openai` addon you can quickly create scenes interacting with the
 
 Download the ZIP file from GitHub or install through the AssetLib when available.
 
+## Examples
+
+### Chat
+
+![Chat example](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/chat.png)
+
+### Image generation
+
+![Image generation example](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/image-generation.png)
+
+### Browse the saved resources
+
+![Saved resources](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/image-browser.png)
+
 ## User Data
 
 The settings file `open_ai_user_data.tres` and all requests and responses are saved in `user://`.

@@ -49,13 +49,15 @@ You need to add 3 parts to your scene:
 As a child in your tree.
 
 ```gdscript
-@ready var openai_api_request:OpenAiApiRequest = $OpenAiApiRequest
+@onready var openai_api_request:OpenAiApiRequest = $OpenAiApiRequest
 
 func _ready():
 	# Connect openai_api_request signals through the UI or code
+	openai_api_request.connect("data_received", _on_open_ai_api_request_data_received)
+	openai_api_request.connect("error_response", _on_open_ai_api_request_error_response)
 
 func _on_open_ai_api_request_data_received(data):
-  response = data
+	response = data
 
 func _on_open_ai_api_request_error_response(error):
 	print(error)
@@ -84,7 +86,7 @@ var response:ChatCompletionsResponse = ChatCompletionsResponse.new()
 Initiate the call ie by a Button click
 
 ```
-connector.do_post(request, response)
+openai_api_request.do_post(request, response)
 ```
 
 and wait for one of the two signals to appear.

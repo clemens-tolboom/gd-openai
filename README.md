@@ -1,4 +1,4 @@
-# GD Script OpenAI
+# GD Script OpenAI (0.3.0)
 
 Interfacing with the [OpenAI API's](https://platform.openai.com/overview) using their **[API Key](https://platform.openai.com/account/api-keys)**
 
@@ -41,13 +41,14 @@ The requests and responses for browsing back possibilities.
 The tool needs an [API key](https://platform.openai.com/account/api-keys)
 from your OpenAI account.
 
-**Copy** the `open_ai_user_data.tres` from the examples dir to your project root.
+Run `addons/gd-openai/user_data.tscn` to set your API key.
 
-Then open it and replace the `API Key` field with your OpenAI API Key.
+Then run one of the examples to validate your key is correct.
+- `addons/gd-openai/examples/scenes/models.tscn`
+- `addons/gd-openai/examples/scenes/image_strip.tscn`
+- `addons/gd-openai/examples/scenes/chat_completions.tscn`
 
-Then **move** the file out of your project to the game data directory using the menu `Project > Open User Data Folder.
-
-You must move it to make sure not to expose your API Key to the world.
+The key is stored in `Project > Open User Data Folder`.
 
 ## Examples
 

@@ -40,14 +40,26 @@ func _init() -> void:
 func set_authorization() -> void:
 	if _api_key == "":
 		load_api_key()
-	assert(not _api_key == "", "No API key found")
+	if _api_key == "":
+		printerr("No API key found")
+		return
 
 	headers["Authorization"] = "Bearer %s" % _api_key
 
 
 ## Helper to key the API key.
 func load_api_key() -> void:
+	if not FileAccess.file_exists(CONFIG):
+		var res:OpenAiUserData = OpenAiUserData.new()
+		var err = ResourceSaver.save(res, CONFIG)
+		if not err == OK:
+			printerr("Failed to create", CONFIG)
+			return
+
 	var r:OpenAiUserData = ResourceLoader.load(CONFIG)
+	if r == null:
+		printerr("File not found", CONFIG)
+
 	assert(not r == null, "File '%s'not found or wrong content" % CONFIG)
 	_api_key = r.api_key
 
@@ -69,7 +81,7 @@ func fold_key_value(d:Dictionary) -> PackedStringArray:
 	return r
 
 
-## Builds a dictionary with the needed keys.[br]
+## Builds a dictionary with the needed keys.
 func build_request(root:String) -> Dictionary:
 	return {
 		"body": content,

@@ -1,4 +1,4 @@
-# GD Script OpenAI
+# GD Script OpenAI (0.3.0)
 
 Interfacing with the [OpenAI API's](https://platform.openai.com/overview) using their **[API Key](https://platform.openai.com/account/api-keys)**
 
@@ -6,6 +6,20 @@ With the `gd-openai` addon you can quickly create scenes interacting with the
 [API](https://platform.openai.com/docs/api-reference) of OpenAI. See the examples below.
 
 Download the ZIP file from GitHub or install through the AssetLib when available.
+
+## Examples
+
+### Chat
+
+![Chat example](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/chat.png)
+
+### Image generation
+
+![Image generation example](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/image-generation.png)
+
+### Browse the saved resources
+
+![Saved resources](https://raw.githubusercontent.com/clemens-tolboom/gd-openai/main/addons/gd-openai/assets/image-browser.png)
 
 ## User Data
 
@@ -27,13 +41,14 @@ The requests and responses for browsing back possibilities.
 The tool needs an [API key](https://platform.openai.com/account/api-keys)
 from your OpenAI account.
 
-**Copy** the `open_ai_user_data.tres` from the examples dir to your project root.
+Run `addons/gd-openai/user_data.tscn` to set your API key.
 
-Then open it and replace the `API Key` field with your OpenAI API Key.
+Then run one of the examples to validate your key is correct.
+- `addons/gd-openai/examples/scenes/models.tscn`
+- `addons/gd-openai/examples/scenes/image_strip.tscn`
+- `addons/gd-openai/examples/scenes/chat_completions.tscn`
 
-Then **move** the file out of your project to the game data directory using the menu `Project > Open User Data Folder.
-
-You must move it to make sure not to expose your API Key to the world.
+The key is stored in `Project > Open User Data Folder`.
 
 ## Examples
 
@@ -49,13 +64,15 @@ You need to add 3 parts to your scene:
 As a child in your tree.
 
 ```gdscript
-@ready var openai_api_request:OpenAiApiRequest = $OpenAiApiRequest
+@onready var openai_api_request:OpenAiApiRequest = $OpenAiApiRequest
 
 func _ready():
 	# Connect openai_api_request signals through the UI or code
+	openai_api_request.connect("data_received", _on_open_ai_api_request_data_received)
+	openai_api_request.connect("error_response", _on_open_ai_api_request_error_response)
 
 func _on_open_ai_api_request_data_received(data):
-  response = data
+	response = data
 
 func _on_open_ai_api_request_error_response(error):
 	print(error)
@@ -84,7 +101,7 @@ var response:ChatCompletionsResponse = ChatCompletionsResponse.new()
 Initiate the call ie by a Button click
 
 ```
-connector.do_post(request, response)
+openai_api_request.do_post(request, response)
 ```
 
 and wait for one of the two signals to appear.

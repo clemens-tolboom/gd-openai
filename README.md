@@ -1,4 +1,4 @@
-# GD Script OpenAI (0.3.0)
+# GDScript OpenAI (0.3.0)
 
 Interfacing with the [OpenAI API's](https://platform.openai.com/overview) using their **[API Key](https://platform.openai.com/account/api-keys)**
 
@@ -6,6 +6,10 @@ With the `gd-openai` addon you can quickly create scenes interacting with the
 [API](https://platform.openai.com/docs/api-reference) of OpenAI. See the examples below.
 
 Download the ZIP file from GitHub or install through the AssetLib when available.
+
+## Usages
+
+- [GDScript OpenAI coding](https://github.com/clemens-tolboom/gd-openai-coding)
 
 ## Examples
 

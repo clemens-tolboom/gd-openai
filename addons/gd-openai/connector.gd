@@ -22,6 +22,14 @@ const SaveResourcePath:StringName = "user://openai/data/"
 func _init():
 	request_completed.connect(_http_request_completed)
 
+func check_api_key():
+	const user = preload("res://addons/gd-openai/user_data.tscn")
+	# FIXME: make this a Popup window
+#	var c = Popup.new()
+#	c.add_child(user.instantiate())
+#	c.popup()
+
+	get_parent().add_child(user.instantiate())
 
 ## Make is possible to switch versioning.[br]
 ##[br]
@@ -47,6 +55,10 @@ func prepare_request(req,resp):
 	_resp = resp
 	# Before requesting we save the request.
 	save_request(req)
+
+	# FIXME: this should be a popup window
+#	if req._api_key == "":
+#		check_api_key()
 
 	return req.build_request(BaseURL)
 
@@ -102,6 +114,8 @@ func _http_request_completed(result: int, response_code: int, headers: PackedStr
 	if response_code >= 400:
 		printt("ERROR", response_code, response["error"])
 		error_response.emit(response["error"])
+		if response_code == 401:
+			check_api_key()
 		return
 
 	_resp.from_dict(response)

@@ -1,3 +1,4 @@
+@tool
 extends Control
 
 @export var user_data:OpenAiUserData
@@ -18,8 +19,10 @@ func _on_button_pressed():
 	load_data()
 
 	# FIXME: how to close depending on parent?
-	if not get_parent().find_child("OpenAiApiRequest", false) == null:
+	if not get_parent().find_child("OpenAiApiRequest", true) == null:
+		printt("Found OpenAiApiRequest")
 		queue_free()
 	else:
+		printt("Quiting")
 		get_tree().quit()
 
